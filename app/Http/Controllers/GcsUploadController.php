@@ -17,20 +17,16 @@ class GcsUploadController extends Controller
         $filePath = $file->getRealPath();
         $fileName = 'uploads/' . $file->getClientOriginalName();
 
-
         $projectId = env('GOOGLE_CLOUD_PROJECT_ID');
         $keyFilePath = base_path(env('GOOGLE_CLOUD_KEY_FILE_PATH'));
         $bucketName = env('GOOGLE_CLOUD_STORAGE_BUCKET');
-
 
         $storage = new StorageClient([
             'projectId' => $projectId,
             'keyFilePath' => $keyFilePath,
         ]);
 
-
         $bucket = $storage->bucket($bucketName);
-
 
         $object = $bucket->upload(
             fopen($filePath, 'r'),
@@ -39,11 +35,7 @@ class GcsUploadController extends Controller
             ]
         );
 
-
-        $object->update(['acl' => []], ['predefinedAcl' => 'PUBLICREAD']);
-
-
-        $publicUrl = $object->info()['mediaLink'];
+        $publicUrl = sprintf('https://storage.googleapis.com/%s/%s', $bucketName, $fileName);
 
         return back()->with('success', 'File uploaded successfully!')->with('url', $publicUrl);
     }

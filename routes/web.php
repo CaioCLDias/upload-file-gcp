@@ -13,6 +13,7 @@ use App\Http\Controllers\GcsUploadController;
 |
 */
 
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -22,3 +23,4 @@ Route::get('upload', function () {
 });
 
 Route::post('upload', [GcsUploadController::class, 'upload']);
+
