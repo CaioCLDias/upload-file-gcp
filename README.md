@@ -61,7 +61,8 @@ Este projeto é uma aplicação Laravel que permite fazer upload de imagens para
 
 ## Estrutura do Projeto
 
-- `app/Http/Controllers/GcsUploadController.php`: Controlador responsável pelo upload e geração da URL pública da imagem.
+- `app/Http/Controllers/GcsUploadController.php`: Controlador responsável por lidar com as rotas, validação e retorno.
+- `app/Services/GcsUploadService.php`: Serviço responsável pela lógica de upload e interação com o Google Cloud Storage.
 - `resources/views/upload.blade.php`: View para o formulário de upload e exibição das imagens.
 - `routes/web.php`: Definições de rotas para a aplicação.
 
